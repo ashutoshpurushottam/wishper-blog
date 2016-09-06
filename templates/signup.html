@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="row">
+		<div class="col s12 offset-s2">
+			<span class="error">{{store_user_error}}</span>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s8 offset-s2 card-panel">
+			<div class="row">
+				<div class="col s12">
+					<h2 class="form-header center-align">Signup</h2></div>
+			</div>
+			<form class="col s12" method="post">
+				<div class="row">
+					<div class="input-field col s8">
+						<input id="username" name="username" type="text" value="{{input_username}}">
+						<label class="active" for="username">Username</label>
+					</div>
+					<div class="col s4">
+						<span class="error">{{username_error}}</span>
+					</div>
+					<div class="input-field col s8">
+						<input id="password" name="password" type="password">
+						<label class="active" for="password">Password</label>
+					</div>
+					<div class="col s4">
+						<span class="error">{{password_error}}</span>
+					</div>
+					<div class="input-field col s8">
+						<input id="verify" name="verify" type="password">
+						<label class="active" for="verify">Verify Password</label>
+					</div>
+					<div class="col s4">
+						<span class="error">{{verify_error}}</span>
+					</div>
+					<div class="input-field col s8">
+						<input id="email" name="email" type="email" value="{{input_email}}">
+						<label class="active" for="email">Email(optional)</label>
+					</div>
+					<div class="col s4">
+						<span class="error">{{email_error}}</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12">
+						<button class="btn waves-effect waves-light indigo darken-4" type="submit" name="action">Submit
+						<i class="material-icons right">send</i>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+    <br><br><br><br>
+
+{% endblock %}

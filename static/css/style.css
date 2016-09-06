@@ -1,0 +1,171 @@
+/* Custom styling for the blog */
+body {
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 1.2rem;
+    color:##333333;
+}
+
+.main-page-welcome {
+    font-size: 2rem;
+}
+
+.cursive {
+    font-family: 'Courgette', cursive;
+}
+
+.light-cursive {
+    color: #aaaaaa;
+    font-family: 'Courgette', cursive;
+    font-size: 1.4rem;
+}
+
+.head-username {
+    color: #aaaaaa;
+    font-family: 'Courgette', cursive;
+    font-size:0.8em;
+}
+
+.light-cursive-author {
+    color: #aaaaaa;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size:1em;
+}
+
+.light-comment {
+    color: #841f27;
+    font-family: 'Open Sans Condensed', sans-serif;;
+    font-size: 1rem;
+}
+
+.comment-header {
+    font-size: 1.2em;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color:#545454;
+}
+
+.card-panel {
+    box-shadow: 0 4px 10px 0 rgba(63, 81, 181, 0.16), 0 2px 10px 0 rgba(63, 81, 181, 0.12);
+}
+
+.delete-post-title {
+    color: #841f27;
+    font-size: 2rem;
+}
+
+.title-small {
+    color: #841f27;
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 699px) {
+
+}
+
+/* styles for '...' */
+.block-with-text {
+  /* hide text if it more than N lines  */
+  overflow: hidden;
+  /* for set '...' in absolute position */
+  position: relative;
+  /* use this value to count block height */
+  line-height: 1.2em;
+  /* max-height = line-height (1.2) * lines max number (3) */
+  max-height: 6.0em;
+  /* fix problem when last visible word doesn't adjoin right side  */
+  text-align: left;
+  /* place for '...' */
+  margin-right: 1em;
+  padding-right: 1em;
+}
+/* create the ... */
+.block-with-text:before {
+  /* points in the end */
+  content: '...';
+  /* absolute position */
+  position: absolute;
+  /* set position to left bottom corner of block */
+  right: 0;
+  bottom: 0;
+}
+/* hide ... if we have text, which is less than or equal to max lines */
+.block-with-text:after {
+  /* points in the end */
+  content: '';
+  /* absolute position */
+  position: absolute;
+  /* set position to right bottom corner of text */
+  left: 0;
+  /* set width and height */
+  width: 1em;
+  height: 1em;
+  margin-top: 1em;
+  /* bg color = bg color under block */
+  background: white;
+}
+
+/* unvisited link */
+a.page-link {
+    color: #990066;
+}
+
+a.page-link-small {
+    color: #990066;
+    font-size: 0.9rem;
+}
+
+
+.blog-title {
+    font-size: 2.2rem;
+}
+
+.light {
+    color: #aaaaaa;
+}
+
+
+.username {
+    color: #aaaaaa;
+    font-size:2rem;
+    font-family: 'Courgette', cursive;
+    height: 48px;
+}
+
+
+
+.light-cursive-black {
+    font-family: 'Courgette', cursive;
+    font-size: 1.6rem;
+}
+
+
+.main-page-image {
+    width:100%;
+}
+
+.error {
+    color: #cc0000;
+}
+
+nav .brand-logo-small {
+    font-size: 1.4rem;
+}
+
+
+.form-header {
+    font-size: 1.4rem;
+
+}
+
+#blog-header-title {
+    font-size:1.4 rem;
+    font-family: 'Courgette', cursive;
+    text-align: center;
+}
+
+#header-logo {
+    position: relative;
+    top: 12px;
+    width: 48px;
+    height: 48px;
+}
+

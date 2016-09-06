@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col s12">
+            {% if user %}
+                <h2 class="center-align main-page-welcome">
+                    Welcome to blog <span class="cursive">{{user.username}}</span>
+                    <br>
+                    <span class="light-cursive">(Proceed to <a href="/blog" class="page-link">front page</a> or
+                        <a href="/blog/newpost" class="page-link">add a post</a>)</span>
+                </h2>
+            {% else %}
+                <h2 class="center-align main-page-welcome">
+                    Welcome to <span class="cursive">Whisper Blog</span> <br>
+                    <span class="light-cursive">(<a href="/signup" class="page-link">Signup</a>
+                        <a href="/login" class="page-link">/Login</a> and start whispering)</span>
+                </h2>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <img src="/static/img/network.png" alt="network image" class="main-page-image">
+        </div>
+    </div>
+
+{% endblock %}
