@@ -1,7 +1,7 @@
 # Multi-user-blog
 Multi User Blog Project for Udacity's Full Stack Nanodegree
 
-Go to the live version of this project at: http://http://wishperblog.appspot.com/
+Go to the live version of this project at: http://wishperblog.appspot.com/
 
 To run this code, you must first have the [Google App Engine SDK for Python](https://cloud.google.com/appengine/downloads) installed.
 
