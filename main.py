@@ -60,6 +60,13 @@ class MainHandler(BaseHandler):
 		self.render("index.html")
 
 
+class UnauthorizedAccessHandler(BaseHandler):
+	"""Show unauthorize page with message"""
+	def get(self):
+		error = self.request.get("error")
+		self.render("unauthorized.html", error=error)
+
+
 class SignupHandler(BaseHandler):
     """
     Handles form validation, checks if the username and/or email id already exists.
@@ -129,11 +136,12 @@ class LoginHandler(BaseHandler):
 	def get(self):
 		# If the user is already logged in redirect her to welcome page
 		username = self.request.cookies.get('user')
+		error_message = self.request.get('error')
 		if username:
 			# redirect to home page
 			self.redirect('/')
 		else:
-			self.render("login.html")
+			self.render("login.html", error_message=error_message)
 
 	def post(self):
 		username = self.request.get('username')
@@ -205,10 +213,16 @@ class EditPostHandler(BaseHandler):
 				self.error(404)
 				return
 			else:
-				self.render("editpost.html", post=post)
+				if post.author.username == self.user.username:
+					self.render("editpost.html", post=post)
+				else:
+					# redirect to login
+					error_message = "You are not permitted to edit a post that you have not created."
+					self.redirect('/unauthorized?error=' + error_message)
 		else:
-			# redirected to login page
-			self.render('/login')
+			# render login page with message that you have been redirected
+			error_message = "You can't edit a post without logging in."
+			self.redirect('/login?error=' + error_message)
 
 	def post(self):
 		post_id = self.request.get("post")
@@ -241,9 +255,15 @@ class DeletePostHandler(BaseHandler):
 				self.error(404)
 				return
 			else:
-				self.render("deletepost.html", post=post)
+				if post.author.username == self.user.username:
+					self.render("deletepost.html", post=post)
+				else:
+					error_message = "You are not permitted to delete a post that you have not created."
+					self.redirect('/unauthorized?error=' + error_message)
 		else:
-			self.render('/login')
+			# render login page with message that you have been redirected
+			error_message = "You can't delete a post without logging in."
+			self.redirect('/login?error=' + error_message)
 
 	def post(self):
 		post_id = self.request.get("post")
@@ -264,9 +284,15 @@ class CommentEditHandler(BaseHandler):
 			if not comment:
 				self.error(404)
 				return
-			self.render("editcomment.html", content=comment.content, post_id=comment.post_id)
+			if comment.author.username == self.user.username:
+				self.render("editcomment.html", content=comment.content, post_id=comment.post_id)
+			else:
+				error_message = "You can not edit comments posted by other users."
+				self.redirect('/unauthorized?error=' + error_message)
 		else:
-			self.redirect("/login")
+			# render login page with message that you have been redirected
+			error_message = "You can't edit a comment without logging in."
+			self.redirect('/login?error=' + error_message)
 
 	def post(self):
 		# retrieve comment
@@ -288,30 +314,34 @@ class CommentEditHandler(BaseHandler):
 			self.redirect("/blog/%s" % comment.post_id)
 
 class DeleteCommentHandler(BaseHandler):
-    """Handles deletion of comments"""
-    def get(self):
-        if self.user:
-			# retrieve comment
-            comment_id = self.request.get("comment")
-            key = ndb.Key('Comment', int(comment_id))
-            comment = key.get()
-            if not comment:
-                self.error(404)
-                return
-            self.render("deletecomment.html", comment = comment)
-        else:
-            self.redirect("/login")
+	"""Comment deletion handler"""
+	def get(self):
+		if self.user:
+			comment_id = self.request.get("comment")
+			key = ndb.Key('Comment', int(comment_id))
+			comment = key.get()
+			if comment:
+				if comment.author.username == self.user.username:
+					self.render("deletecomment.html", comment=comment)
+				else:
+					error_message = "You can't delete a comment posted by other user"
+					self.redirect('/unauthorized?error=' + error_message)
+			else:
+				self.error(404)
+				return
+		else:
+			error_message = "You can't delete a comment without logging in."
+			self.redirect('/login?error=' + error_message)
 
-    def post(self):
-        comment_id = self.request.get("comment")
-        key = ndb.Key('Comment', int(comment_id))
-        comment = key.get()
-        if comment and comment.author.username == self.user.username:
-            post_id = comment.post_id
-            key.delete()
-            time.sleep(0.1)
-        self.redirect("/blog/%s" % post_id)
-
+	def post(self):
+		comment_id = self.request.get("comment")
+		key = ndb.Key('Comment', int(comment_id))
+		comment = key.get()
+		if comment and comment.author.username == self.user.username:
+			post_id = comment.post_id
+			key.delete()
+			time.sleep(0.1)
+		self.redirect("/blog/%s" % post_id)
 
 
 
@@ -371,6 +401,7 @@ class PostHandler(BaseHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+	('/unauthorized', UnauthorizedAccessHandler),
 	('/blog', BlogHandler),
     ('/signup', SignupHandler),
 	('/welcome', WelcomeHandler),

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block othermeta %}
+    <meta http-equiv="refresh" content="5;URL='/'">
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col s12">
+            <p class="center-align big-error">Attempt to access unauthorized page detected.</p>
+            <p class="center-align error">{{error}}</p>
+            <br><br>
+            <p class="center-align error">You will be redirected to main page in 5 seconds...</p>
+        </div>
+    </div>
+{% endblock %}
+
