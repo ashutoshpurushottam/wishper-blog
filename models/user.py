@@ -1,18 +1,14 @@
 ## helper functions and convenience code
 ## for saving blog users
 
-import webapp2
-import jinja2
 import hashlib
 import hmac
 import random
 import string
-import codecs
-import os
 import re
 
 from google.appengine.ext import ndb
-from secret_code import secret as SECRET
+from base.secret_code import secret as SECRET
 
 # username regex
 USER_RE = re.compile(r"^[a-zA-Z0-9_-]{3,20}$")
