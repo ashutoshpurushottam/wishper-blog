@@ -20,7 +20,10 @@ class SignupHandler(BaseHandler):
 		input_verify = self.request.get('verify')
 		input_email = self.request.get('email')
 
-		validate_response = validate(input_username, input_password, input_verify, input_email)
+		validate_response = validate(input_username, 
+                                    input_password, 
+                                    input_verify, 
+                                    input_email)
 		# if validate_response dictionary is empty, the user input values are valid
 		# (except that the username/email may already be taken which need to be tested)
 		if validate_response:
@@ -36,7 +39,9 @@ class SignupHandler(BaseHandler):
 						input_username=input_username,
 						input_email=input_email)
 		else:
-			store_user_response = store_blog_user(input_username, input_password, input_email)
+			store_user_response = store_blog_user(input_username, 
+                                                input_password, 
+                                                input_email)
 			if store_user_response:
 				self.render("signup.html",
 							store_user_error = store_user_response,

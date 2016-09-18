@@ -48,7 +48,7 @@ class PostHandler(BaseHandler):
 		# user posted comment on the post
 		else:
 			content = self.request.get('content')
-			if content:
+			if content and self.user:
 				content = content.encode('ascii', 'ignore')
 				comment = Comment(content=str(content), author=self.user, post_id=int(post_id))
 				comment.put()

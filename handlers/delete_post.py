@@ -28,7 +28,7 @@ class DeletePostHandler(BaseHandler):
 		post_id = self.request.get("post")
 		key = ndb.Key('BlogPost', int(post_id), parent=blog_key())
 		post = key.get()
-		if post and post.author.username == self.user.username:
+		if post and self.user and post.author.username == self.user.username:
 			key.delete()
 			time.sleep(0.1)
 		self.redirect("/blog")
