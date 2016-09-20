@@ -1,62 +1,68 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<!--Import Google Icon Font-->
-	<link href='https://fonts.googleapis.com/css?family=Courgette' rel='stylesheet'>
-	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
-	<link rel="stylesheet" href="/static/css/materialize.min.css">
-	<link rel="stylesheet" href="/static/css/style.css">
-	{% block othermeta %}
-	{% endblock %}
-	<title>Whisper Blog</title>
+    <!--Import Google Icon Font-->
+    <link href='https://fonts.googleapis.com/css?family=Courgette' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/materialize.min.css">
+    <link rel="stylesheet" href="/static/css/style.css"> {% block othermeta %} {% endblock %}
+    <title>Whisper Blog</title>
 </head>
+
 <body>
-	<header>
-		<nav class="indigo darken-4" role="navigation">
-  			<div class="nav-wrapper container">
-				<a href="#" class="brand-logo brand-logo-small hide-on-med-and-down">
-					<img id="header-logo" src="/static/img/logo.png" alt="Blog logo">
-					<span id="blog-header-title">Whisper Blog</span>
-				</a>
-				<ul class="right">
-					{% if user %}
-						<li><a href="/">Home</a></li>
-						<li><a href="/blog">Blog</a></li>
-						<li><a href="/blog/newpost">Create Post</a></li>
-						<li><a href="/logout">Logout</a></li>
-					{% else %}
-						<li><a href="/">Home</a></li>
-						<li><a href="/blog">Blog</a></li>
-						<li><a href="/signup">Signup</a></li>
-						<li><a href="/login">Login</a></li>
-					{% endif %}
-				</ul>
-  			</div>
-		</nav>
-	</header>
-	<main>
-		<div class="container">
-			<div class="row">
-				<br>
-				<div class="col s12 right-align head-username">
-					{% if user %}
-						Logged in: {{user.username}}
-					{% endif %}
-				</div>
-			</div>
-			<div class="row">
-				<div class="col s12">
-					{% block content %}
-					{% endblock %}
-				</div>
-			</div>
-		</div>
-	</main>
-	<!-- jQuery is required by Materialize to function -->
-	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script src="/static/js/materialize.min.js"></script>
-  	<script src="/static/js/init.js"></script>
-  	</body>
+    <header>
+        <nav class="indigo darken-4" role="navigation">
+            <div class="nav-wrapper container">
+                <a href="#" class="brand-logo brand-logo-small hide-on-med-and-down">
+                    <img id="header-logo" src="/static/img/logo.png" alt="Blog logo">
+                    <span id="blog-header-title">Whisper Blog</span>
+                </a>
+                <ul class="right">
+                    {% if user %}
+                    <li><a href="/">Home</a>
+                    </li>
+                    <li><a href="/blog">Blog</a>
+                    </li>
+                    <li><a href="/blog/newpost">Create Post</a>
+                    </li>
+                    <li><a href="/logout">Logout</a>
+                    </li>
+                    {% else %}
+                    <li><a href="/">Home</a>
+                    </li>
+                    <li><a href="/blog">Blog</a>
+                    </li>
+                    <li><a href="/signup">Signup</a>
+                    </li>
+                    <li><a href="/login">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <br>
+                <div class="col s12 right-align head-username">
+                    {% if user %} Logged in: {{user.username}} {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    {% block content %} {% endblock %}
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- jQuery is required by Materialize to function -->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="/static/js/materialize.min.js"></script>
+    <script src="/static/js/init.js"></script>
+</body>
+
 </html>
